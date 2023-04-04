@@ -10,7 +10,7 @@
 
 import java.util.Scanner;
 
-public class 삼항연산자_2 {
+public class 삼항연산자_2_가위바위보 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
