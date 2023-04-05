@@ -1,0 +1,28 @@
+
+public class 배열_2 {
+
+	public static void main(String[] args) {
+		
+		/////난수를 배열로 가져오기
+		int[] arr = new int[100];
+		
+		for(int i=0; i<arr.length; i++)
+		{
+			arr[i]= (int)(Math.random()*100)+1;
+			System.out.printf("arr[%d]=%d\n", i, arr[i]);
+		}
+		
+		
+		/////최대값 구하기
+		int max = 0;
+		for(int i=0; i<arr.length; i++)
+		{
+			if(max < arr[i]) {
+				max= arr[i];
+			}		
+		}
+		
+		System.out.println("최대값: " + max);
+	}
+
+}
