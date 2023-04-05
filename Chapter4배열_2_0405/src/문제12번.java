@@ -17,13 +17,14 @@ public class 문제12번 {
 		{
 			 arr[i] = (int)(Math.random()*100)+1;
 			 total += arr[i];
-			 avg = total/10.0;
+//			 avg = total/10.0;
 		}
+		
 		
 		 
 		System.out.println(Arrays.toString(arr));
 		System.out.println(total);
-		System.out.printf("%.2f\n", avg);
+		System.out.printf("%.2f\n", total/10.0);   //
 		
 
 	}
