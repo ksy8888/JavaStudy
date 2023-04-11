@@ -36,6 +36,7 @@ public class 메소드_4 {
 		}
 		return arr;
 	}
+	
 	//최대값, 최소값 
 	static int max(int[] arr)
 	{
@@ -46,6 +47,7 @@ public class 메소드_4 {
 		}
 		return m;
 	}
+	
 	static int min(int[] arr)
 	{
 		int m=arr[0];
@@ -57,8 +59,10 @@ public class 메소드_4 {
 	}
 	
 	static void process() {
+		
 		int[] arr = rand();
 		int total=0;
+		
 		for(int a:arr) {
 			total+=a;
 		}

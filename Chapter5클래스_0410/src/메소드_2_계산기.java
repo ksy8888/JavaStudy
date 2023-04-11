@@ -38,7 +38,7 @@ public class 메소드_2_계산기 {
 		int b = scan.nextInt();
 		
 		System.out.print("연산자 입력(+,-,*,/): ");
-		String op = scan.next();
+		String op = scan.next();	//
 		
 		int res=0;
 		switch(op) {
