@@ -1,5 +1,6 @@
 package com.sist.music;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MusicSystem {
@@ -64,7 +65,7 @@ public class MusicSystem {
 		} 	////////////// 갯수를 확인
 		
 		Music[] m= new Music[count];	//구한 갯수만큼 배열 생성
-		
+	///	System.out.println(Arrays.toString(m));
 		int i=0;
 		for(Music mm : music)	//값 대입
 		{

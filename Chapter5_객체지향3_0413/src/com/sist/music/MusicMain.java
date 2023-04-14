@@ -15,6 +15,7 @@ public class MusicMain {
 		
 		while(true) {
 			int menu = ms.menu();
+			
 			if(menu==9) {
 				System.out.println("프로그램 종료");
 				break;
