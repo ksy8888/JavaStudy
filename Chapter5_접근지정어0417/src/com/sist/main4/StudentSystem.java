@@ -14,8 +14,9 @@ public class StudentSystem {
 		for(int i=0; i<std.length; i++) {
 			//메모리 할당 안된 상태.
 			
-			std[i] = new Student();  // 배열은 모든 저장공간이 null
+/*****/			std[i] = new Student();  // 배열은 모든 저장공간이 null
 			//	----------------------- 메모리 연결하는 부분***** 이거 없으면 NullPointException 오류남
+
 			System.out.println("학번 입력: ");
 			std[i].setHakbun(scan.nextInt());	
 			
