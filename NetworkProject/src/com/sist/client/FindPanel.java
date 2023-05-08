@@ -24,8 +24,7 @@ public class FindPanel extends JPanel implements ActionListener {
 	public FindPanel() {
 		//초기화
 		tf = new JTextField();
-		b1 = new JButton("검색");
-		
+		b1 = new JButton("검색");		
 		b2 = new JButton("명소");
 		b3 = new JButton("자연관광");
 		b4 = new JButton("엔터");
@@ -72,6 +71,7 @@ public class FindPanel extends JPanel implements ActionListener {
 		p.add(b5);
 		p.add(b6);
 		p.add(b7);
+		p.add(b8);
 		p.setBounds(10, 55, 720, 35);
 		add(p);
 		
@@ -101,6 +101,7 @@ public class FindPanel extends JPanel implements ActionListener {
 		b5.addActionListener(this);
 		b6.addActionListener(this);
 		b7.addActionListener(this);
+		b8.addActionListener(this);
 		tf.addActionListener(this);		
 	}
 
@@ -118,6 +119,8 @@ public class FindPanel extends JPanel implements ActionListener {
 			findPrint(5);
 		} else if(e.getSource()==b7) {
 			findPrint(6);
+		} else if(e.getSource()==b8) {
+			findPrint(7);
 		}
 		
 		else if(e.getSource()==b1 || e.getSource()==tf) {

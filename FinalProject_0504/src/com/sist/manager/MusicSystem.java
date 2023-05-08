@@ -31,8 +31,31 @@ public class MusicSystem {
 		}
 		
 	}
+//////////////////////0508
+	public  List<GenieMusicVO> musicListData(int page) {	//뮤직데이터 20개씩 나눠서 전송하는 메소드. 사용자가 page누른거에 따라
+		List<GenieMusicVO> gList = new ArrayList<GenieMusicVO>();
+		int j=0;
+		int rowSize=20;
+		int start= (page-1)*rowSize;	//시작페이지 설정
+		/*
+		 	1 page => 0~19
+		 	2 page => 20~39
+		 */
+		
+		for(int i=0; i<list.size(); i++) {
+			if(j<rowSize && i>=start) {	//20번 이전이면 저장함 >> 1페이지 저장
+				gList.add(list.get(i));
+				j++;
+			}
+		}
+		return gList;
+	}
 	
-/////////////////////////////////////////////////////////////////	
+	public int musicTotalPage() {
+		return (int)(Math.ceil(list.size()/20.0));	//한 페이지 20개씩
+	}
+	
+/////////////////////////////////////////////////////////////////	0504
 	public  List<GenieMusicVO> musicCategoryData(int cno) {
 		List<GenieMusicVO> mList = new ArrayList<GenieMusicVO>();	//장르별 출력
 		for(GenieMusicVO vo : list) {
