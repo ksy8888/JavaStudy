@@ -4,7 +4,7 @@ package com.sist.String;
  	305 page
  	 = String : 문자열을 조작하고 처리하는 기능
  	 			---------
- 	 			= String은 클래스 , 일반 ㅔ이터형으로 취급
+ 	 			= String은 클래스 , 일반 데이터형으로 취급
  	 				=> 모든 클래스는 Call By Reference , String은 Call By Value
  	 				A a = new A()
  	 				A b = a;	==> 같은 주소를 제어
