@@ -156,7 +156,7 @@ public class ClientMain extends JFrame implements ActionListener, Runnable {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==b1) { //서버연결
 			try {
-				s=new Socket("localhost" , 3355);
+				s=new Socket("211.238.142.118" , 3355);
 				in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 				out = s.getOutputStream();
 			} catch (Exception e2) {

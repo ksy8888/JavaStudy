@@ -183,7 +183,8 @@ public class Server implements Runnable {
 							//waitVc에 첨부
 							waitVC.add(this);
 							//로그인은 종료 => main창을 보여준다
-							messageTo(Function.MYLOG+ "|" + name);
+//////////////////////////// id하나 추가							
+							messageTo(Function.MYLOG+ "|" + name + "|" + id);
 							//로그인하는 사람에게 모든 정보를 전송
 							for(Client user : waitVC) {
 								messageTo(Function.LOGIN + "|" 
@@ -199,6 +200,45 @@ public class Server implements Runnable {
 								String strMsg = st.nextToken();
 								String color = st.nextToken();
 								messageAll(Function.CHAT + "|[" + name + "]" + strMsg+"|" + color);
+							}
+							break;
+				///////			
+							case Function.INFO:
+							{
+							//상대방의 ID를 받는다
+								String youId = st.nextToken();
+								for(Client user : waitVC) {	//waitVC에 유저 모든 정보 들어있음
+									//정보 볼 대상을 찾는다
+									/*
+									 	서버의 역할
+									 	1) 저장 (클라이언트 정보)
+									 		=> waitVc(Vector)
+									 	2) 검색 : ID, Name 
+									 	3) 수정 : ID,PWD...
+									 	4) 클라이언트로 전송 기능
+									 	5) 요청에 처리 기능
+									 */
+									if(youId.equals(user.id)) {
+										messageTo(Function.INFO + "|"
+												+ user.id + "|"
+												+ user.name + "|"
+												+ user.sex );
+										break;
+									}
+								}
+							}
+							break;
+							case Function.MSGSEND:
+							{
+								String youId = st.nextToken();
+								String strMsg = st.nextToken();
+								for(Client user:waitVC) {
+									if(youId.equals(user.id)) {
+										user.messageTo(Function.MSGSEND + "|"
+												+ id + "|" + strMsg);
+										break;
+									}
+								}
 							}
 							break;
 							}

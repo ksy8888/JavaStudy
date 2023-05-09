@@ -1,9 +1,12 @@
 package com.sist.manager;
 
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,7 +34,7 @@ public class DataCollectionManager {
             int c =1;
             int cg=0;
 
-            String [] urls2 = {"attractions","nature","entertainment","shopping","restaurants","hotels","seoul-stay"};
+            String [] urls2 = {"attractions","nature","entertainment","shopping","restaurants","hotels"};
 
 
 
@@ -91,7 +94,7 @@ public class DataCollectionManager {
 
                         String posterUrl="";
 
-                        if(!url.contains("hotels") && !url.contains("seoul-stay")){
+                        if(!url.contains("hotels")){
 
                             String str = poster.get(k).attr("style");
 
@@ -102,7 +105,21 @@ public class DataCollectionManager {
                             System.out.println(posterUrl);
 
                         }
+ /*                       else if (url.contains("seoul-stay")) {
 
+//                        	title = doc.select("div.article-list-slide li.item i.ico-hotel");
+
+                        	poster = doc.select("div.article-list-slide li.item img");
+
+                        	String str = poster.get(k).attr("src");
+
+                        	str = str.substring(str.indexOf("h"),str.lastIndexOf("M")+1);
+
+                            posterUrl= str;
+
+                            System.out.println(posterUrl);
+                      }
+ */ 
                         else { // url이 호텔과 게스트하우스인경우
 
                             posterUrl = poster.get(k).attr("src");
@@ -110,27 +127,7 @@ public class DataCollectionManager {
                            
 
                         }
-
-
-
-//                        detailURL = href.get(k).attr("href");
-
-//                        System.out.println("https://korean.visitseoul.net/"+detailURL);
-
-//                        doc = Jsoup.parse("https://korean.visitseoul.net/"+urls2[i]+detailURL);
-
-//                        Element poster = doc.select("div.wide-slide-element div[style]").first();
-
-//                        String str = poster.attr("style");
-
-//                        str = str.substring(str.indexOf("\'"),str.lastIndexOf("\'"));
-
-//                        System.out.println(str);
-
                         // VO에 데이터 넣기
-
-
-
                         vo.setNo(c);
 
                         vo.setCno(cg);
@@ -140,7 +137,7 @@ public class DataCollectionManager {
                         vo.setContents(contents.get(k).text());
 
                         vo.setPoster(posterUrl);
-
+                       
                         list.add(vo);
 
                         c++;
@@ -165,7 +162,8 @@ public class DataCollectionManager {
 
             try {
 
-
+            	fos.close();
+				oos.close();
 
             } catch (Exception e2) {
 
@@ -176,6 +174,7 @@ public class DataCollectionManager {
             }
 
         }
+       
 
     }
 

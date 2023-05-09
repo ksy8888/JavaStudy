@@ -76,6 +76,17 @@ public class MusicSystem {
 		}
 		return mList;
 	}
+//////////////////////////////////////////////////////0509
+	public GenieMusicVO musicDetailData(String title) {
+		GenieMusicVO vo = new GenieMusicVO();
+		for(GenieMusicVO gvo : list) {
+			if(gvo.getTitle().equals(title)) { //같은 이름을 갖고 있는거 찾아옴
+				vo = gvo;
+				break;	
+			}
+		}
+		return vo;
+	}
 	
 	public static void main(String[] args) {
 		MusicSystem ms = new MusicSystem();

@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import com.sist.common.*;
+import com.sist.inter.FindInterface;
 import com.sist.manager.*;
 
 import java.util.*;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.net.*;
 import java.awt.event.*;
 
-public class FindPanel extends JPanel implements ActionListener {
+public class FindPanel extends JPanel implements ActionListener, FindInterface {
 	JTextField tf;
 	JButton b1;
 	JButton b2,b3,b4,b5,b6,b7;

@@ -89,6 +89,19 @@ public class TravelSystem {
 		}
 		return mList;
 	}
+/////////////////////////////////////////////////////////////////////
+	
+	public TravelVO travelDetailData(String title) {
+		TravelVO vo = new TravelVO();
+		for(TravelVO gvo : list) {
+			if(gvo.getTitle().equals(title)) { //같은 이름을 갖고 있는거 찾아옴
+				vo = gvo;
+				break;	
+			}
+		}
+		return vo;
+	}
+	
 	
 	public static void main(String[] args) {
 		TravelSystem ms = new TravelSystem();

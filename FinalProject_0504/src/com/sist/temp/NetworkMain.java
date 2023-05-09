@@ -3,6 +3,8 @@ package com.sist.temp;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -19,7 +21,7 @@ import java.net.*;
 /*
  * 
  */
-public class NetworkMain extends JFrame implements ActionListener, Runnable {
+public class NetworkMain extends JFrame implements ActionListener, Runnable, MouseListener {
 	
 	MenuPanel mp;
 	ControlPanel cp;
@@ -40,6 +42,16 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable {
 	BufferedReader in;
 	//서버로 값을 전송
 	OutputStream out;
+	
+	//ID저장
+	String myId;
+	
+	//테이블 선택 인덱스번호 
+	int selectRow = -1;	//-1로 둬서 선택을 안한상태
+	
+	//쪽지보내기
+	SendMessage sm = new SendMessage();
+	RecvMessage rm = new RecvMessage();
 	
 	public NetworkMain() {
 		logo = new JLabel();
@@ -115,6 +127,16 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable {
 		cp.hp.b2.addActionListener(this);	//다음
 		cp.hp.pageLa.setText(curpage+ " page /" + totalpage + " pages");
 		
+		cp.cp.b1.addActionListener(this);
+		cp.cp.b2.addActionListener(this);
+		cp.cp.table.addMouseListener(this);
+		
+		///쪽지 보내기
+		sm.b1.addActionListener(this);
+		sm.b2.addActionListener(this);
+		rm.b1.addActionListener(this);
+		rm.b2.addActionListener(this);
+		
 		//musicDisplay();
 	}
 	
@@ -180,7 +202,8 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable {
 			//서버로 전송
 			try {
 				//서버 연결
-				s= new Socket("211.238.142.118", 3456);
+				s= new Socket("", 3355);
+				//s= new Socket("211.238.142.118", 3456);
 				//서버 컴퓨터 => IP
 				//211.238.142.()
 				//읽는 위치 / 쓰는 위치
@@ -229,6 +252,60 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable {
 				musicDisplay();
 			}
 		}
+		else if(e.getSource() == cp.cp.b2) {
+			//정보보기
+			if(selectRow == -1) {
+				JOptionPane.showMessageDialog(this,  "정보볼 대상을 선택하세요");
+				return;
+			}
+			//선택 된 경우
+			String youId = cp.cp.table.getValueAt(selectRow, 0).toString();
+			try {
+				//선택된 아이디의 정보를 보여달라 (서버요청)
+				out.write((Function.INFO + "|" + youId + "\n").getBytes());
+				//out.write => 서버요청 ==> \n포함되야한다
+				//처리 => 서버 => 결과값을 받아서 클라이언트에서 출력
+				
+			} catch (Exception e2) { }
+			
+			
+		}
+		else if(e.getSource() == cp.cp.b1) {
+			//쪽지보내기
+			sm.ta.setText("");
+			String youId = cp.cp.table.getValueAt(selectRow, 0).toString();
+			sm.tf.setText(youId);
+			sm.setVisible(true);
+		}
+		//쪽지 보내기 관련
+		else if(e.getSource() == sm.b2) {
+			sm.setVisible(false);
+		}
+		else if(e.getSource()==rm.b2) {
+			rm.setVisible(false);
+		}
+		else if(e.getSource() == sm.b1) {
+			String youId = sm.tf.getText();
+			String msg = sm.ta.getText();
+			if(msg.length()<1) {
+				sm.ta.requestFocus();
+				return;
+			}
+			try {
+				
+				out.write((Function.MSGSEND+ "|" + youId + "|" + msg + "\n").getBytes());
+				
+			} catch (Exception e2) {}
+			//창을 감춘ㄷ
+			sm.setVisible(false);
+		}
+		else if(e.getSource() == rm.b1) {
+			sm.tf.setText(rm.tf.getText());
+			sm.ta.setText("");
+			sm.setVisible(true);
+			rm.setVisible(true);
+			
+		}
 	}
 
 	// 서버에서 결과값을 받아서 출력 => 쓰레드 (자동화)
@@ -260,7 +337,8 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable {
 				break;
 				case Function.MYLOG:
 				{
-					setTitle(st.nextToken());
+					setTitle(st.nextToken());	//이름
+					myId = st.nextToken(); 		//id저장
 					login.setVisible(false);
 					setVisible(true);
 				}
@@ -272,9 +350,63 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable {
 					//			 채팅 문자열		 색상
 				}
 				break;
+				case Function.INFO:
+				{
+					String data = "아이디:" + st.nextToken() + "\n"
+							+ "이름:" + st.nextToken() + "\n"
+							+"성별:" + st.nextToken();
+					JOptionPane.showMessageDialog(this, data);
+							
+				}
+				break;
+				case Function.MSGSEND:
+				{
+					String id = st.nextToken();
+					String strMSg = st.nextToken();
+					rm.tf.setText(id);
+					rm.ta.setText(strMSg);
+					rm.setVisible(true);
+					
+					
+				}
 				}
 			}
 		} catch(Exception e) {}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getSource() == cp.cp.table) {
+			//if(e.getClickCount() ==2) { 	//더블클릭
+				selectRow = cp.cp.table.getSelectedRow();
+				String id = cp.cp.table.getValueAt(selectRow, 0).toString(); //채팅유저테이블의값 가져옴
+				//JOptionPane.showMessageDialog(this, "선택된 ID:" + id); //아이디클릭시 팝업
+				if(id.equals(myId)) {	//쪽지보내는 사람이 본인일떄는
+					cp.cp.b1.setEnabled(false);	//비활성화
+					cp.cp.b2.setEnabled(false);
+				}
+				else {
+					cp.cp.b1.setEnabled(true);	//활성화
+					cp.cp.b2.setEnabled(true);
+				}
+			//}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
 	}
 
 }
