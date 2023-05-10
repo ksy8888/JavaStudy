@@ -28,5 +28,7 @@ public class Function {
 	public static final int MYLOG=110;	//로그인 처리 (로그인 하는 유저)
 	public static final int CHAT=200;	//채팅 
 	public static final int MSGSEND=300;	//쪽지
+	public static final int MYEXIT=900;	
+	public static final int EXIT=990;	
 	public static final int INFO=400;	//정보보기
 }

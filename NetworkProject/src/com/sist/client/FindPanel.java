@@ -31,7 +31,6 @@ public class FindPanel extends JPanel implements ActionListener {
 		b5 = new JButton("쇼핑");
 		b6 = new JButton("음식");
 		b7 = new JButton("호텔");
-		b8 = new JButton("게스트하우스");
 		
 		String[] col = {"", "장소명", "설명"};
 		Object[][] row = new Object[0][3];
@@ -52,7 +51,7 @@ public class FindPanel extends JPanel implements ActionListener {
 			
 		};
 		table = new JTable(model);	//출력위치 길이 설정
-		table.setRowHeight(35); //줄마다 간격
+		table.setRowHeight(100); //줄마다 간격
 		table.getTableHeader().setReorderingAllowed(false); //타이틀바 고정
 		JScrollPane js = new JScrollPane(table);
 		
@@ -71,7 +70,6 @@ public class FindPanel extends JPanel implements ActionListener {
 		p.add(b5);
 		p.add(b6);
 		p.add(b7);
-		p.add(b8);
 		p.setBounds(10, 55, 720, 35);
 		add(p);
 		
@@ -83,7 +81,7 @@ public class FindPanel extends JPanel implements ActionListener {
 			for(TravelVO vo : list) {
 			//	System.out.println(vo.getPoster());
 				URL url = new URL(vo.getPoster());
-				Image img = ImageChange.getImage(new ImageIcon(url), 30, 30);
+				Image img = ImageChange.getImage(new ImageIcon(url), 130, 130);
 				Object[] data = {
 						new ImageIcon(img),
 						vo.getTitle(),
@@ -101,7 +99,7 @@ public class FindPanel extends JPanel implements ActionListener {
 		b5.addActionListener(this);
 		b6.addActionListener(this);
 		b7.addActionListener(this);
-		b8.addActionListener(this);
+		
 		tf.addActionListener(this);		
 	}
 
@@ -119,8 +117,6 @@ public class FindPanel extends JPanel implements ActionListener {
 			findPrint(5);
 		} else if(e.getSource()==b7) {
 			findPrint(6);
-		} else if(e.getSource()==b8) {
-			findPrint(7);
 		}
 		
 		else if(e.getSource()==b1 || e.getSource()==tf) {
@@ -144,7 +140,7 @@ public class FindPanel extends JPanel implements ActionListener {
 			List<TravelVO> list = ms.travelCategoryData(cno);
 			for(TravelVO vo : list) {
 				URL url = new URL(vo.getPoster());
-				Image img = ImageChange.getImage(new ImageIcon(url), 30, 30);
+				Image img = ImageChange.getImage(new ImageIcon(url), 130, 130);
 				Object[] data = {
 						new ImageIcon(img),
 						vo.getTitle(),
@@ -166,7 +162,7 @@ public class FindPanel extends JPanel implements ActionListener {
 			List<TravelVO> list = ms.travelFindData(title);
 			for(TravelVO vo : list) {
 				URL url = new URL(vo.getPoster());
-				Image img = ImageChange.getImage(new ImageIcon(url), 30, 30);
+				Image img = ImageChange.getImage(new ImageIcon(url), 130, 130);
 				Object[] data = {
 						new ImageIcon(img),
 						vo.getTitle(),

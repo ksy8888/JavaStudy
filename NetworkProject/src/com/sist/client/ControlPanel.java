@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import javax.swing.*;
 
-
 public class ControlPanel extends JPanel {
 	
 //	NewsPanel np = new NewsPanel();
@@ -15,30 +14,41 @@ public class ControlPanel extends JPanel {
 //
 	
 	LocationPanel lp = new LocationPanel();
-	EnterPanel ep = new EnterPanel();
-	AcommPanel ap = new AcommPanel(); //숙박
 	FindPanel fp = new FindPanel();
 	ChatPanel cp = new ChatPanel();
 	NewsPanel np = new NewsPanel();
-	
+	BoardListPanel bp;	
+	BoardDetailPanel bdp;
 	HomePanel hp;
 	DetailPanel dp;
+	BoardInsertPanel ip;
 	
 	CardLayout card = new CardLayout();
+	BoardUpdatePanel bup;
+	BoardDeletePanel bdelp;
+	
 	
 	public ControlPanel() {
 		hp = new HomePanel(this);
 		dp = new DetailPanel(this);
-		
+		ip = new BoardInsertPanel(this);
+		bp = new BoardListPanel(this);		
+		bdp = new BoardDetailPanel(this);
+		bup=new BoardUpdatePanel(this);
+    	bdelp=new BoardDeletePanel(this);
 		setLayout(card);
 		add("home", hp);
 		add("location", lp);
-		add("enter", ep);
-		add("acomm", ap);		
+		
+		add("board", bp);
 		add("find", fp);
 		add("chat", cp);
 		add("news", np);
 		add("detail", dp);
+		add("insert", ip);
+		add("bdp", bdp);
+		add("bup",bup);
+    	add("delete",bdelp);
 		
 //		add("recomm", rp);
 		

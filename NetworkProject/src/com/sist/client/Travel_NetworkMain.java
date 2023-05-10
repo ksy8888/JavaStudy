@@ -26,7 +26,7 @@ public class Travel_NetworkMain extends JFrame implements ActionListener, Runnab
 	MenuPanel mp;
 	ControlPanel cp;
 	TopPanel tp;
-	JButton b1,b2,b3,b4,b5,b6,b7;
+	JButton b1,b2,b3,b4,b5,b6, b9;
 	JLabel logo;
 	Login login = new Login();
 	//페이지 지정
@@ -54,7 +54,7 @@ public class Travel_NetworkMain extends JFrame implements ActionListener, Runnab
 		
 	public Travel_NetworkMain() {
 		logo = new JLabel();
-		Image img = ImageChange.getImage(new ImageIcon("c:\\javaDev\\travel.jpg"), 200, 130);
+		Image img = ImageChange.getImage(new ImageIcon("c:\\javaDev\\lg3.png"), 190, 130);
 		logo.setIcon(new ImageIcon(img));
 		mp = new MenuPanel();
 		cp = new ControlPanel();
@@ -64,7 +64,7 @@ public class Travel_NetworkMain extends JFrame implements ActionListener, Runnab
 	/*	mp.setBounds(10, 15, 1160, 50);
 		cp.setBounds(10, 75, 960 , 730);
 		tp.setBounds(980, 75, 200, 730); */
-		logo.setBounds(10, 15, 200, 130);
+		logo.setBounds(10, 10, 190, 130);
 		mp.setBounds(220, 15, 950, 130);
 		cp.setBounds(100, 150, 900, 800);
 		tp.setBounds(980, 150, 200, 600);
@@ -72,44 +72,53 @@ public class Travel_NetworkMain extends JFrame implements ActionListener, Runnab
 		//추가
 		add(mp);
 		add(cp);
-		add(tp);
+		//add(tp);
 		add(logo);
 		
 		
 		b1 = new JButton("홈");
-		b2 = new JButton("관광");
-		b3 = new JButton("엔터");
-		b4 = new JButton("숙박");
-		b5 = new JButton("검색");
-		b6 = new JButton("채팅");
-		b7 = new JButton("뉴스");
+//b2
+		b2 = new JButton("게시판");
+		b3 = new JButton("검색");
+		b4 = new JButton("채팅");
+		b5 = new JButton("뉴스");
+		b6 = new JButton("나가기");
 		//추가
 		mp.setLayout(new GridLayout(1, 5, 15, 15)); //1줄에 5개씩
 		mp.add(b1);
+		
 		mp.add(b2);
 		mp.add(b3);
 		mp.add(b4);
 		mp.add(b5);
 		mp.add(b6);
-		mp.add(b7);
+		
+		
+			b1.setBackground(new Color(252, 128, 104));
+			b2.setBackground(new Color(252, 128, 104));
+			b3.setBackground(new Color(252, 128, 104));
+			b4.setBackground(new Color(252, 128, 104));
+			b5.setBackground(new Color(252, 128, 104));
+			b6.setBackground(new Color(252, 128, 104));
+			
 		
 		
 		//윈도우 크기
-		setSize(1200,1050);
+		setSize(1250,950);
 		//setVisible(true);
 		
 		//종료
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setTitle("네트워크 프로그램");
 		
 		//이벤트 등록
 		b1.addActionListener(this);
+		
 		b2.addActionListener(this);
 		b3.addActionListener(this);
 		b4.addActionListener(this);
 		b5.addActionListener(this);
 		b6.addActionListener(this);
-		b7.addActionListener(this);
 		
 		//로그인
 				login.b1.addActionListener(this);	//리스너처리메소드 어디있는지
@@ -129,7 +138,6 @@ public class Travel_NetworkMain extends JFrame implements ActionListener, Runnab
 				cp.hp.pageLa.setText(curpage+ " page /" + totalpage + " pages");
 		
 				cp.cp.b1.addActionListener(this);
-				cp.cp.b2.addActionListener(this);
 				cp.cp.table.addMouseListener(this);
 				
 				///쪽지 보내기
@@ -168,17 +176,13 @@ public void travelDisplay() {
 			curpage=1;
 			travelDisplay();
 			cp.card.show(cp, "home");
-		} else if(e.getSource()==b2) {
-			cp.card.show(cp, "location");
+		}  else if(e.getSource()==b2) {
+			cp.card.show(cp, "board");
 		} else if(e.getSource()==b3) {
-			cp.card.show(cp, "enter");
-		} else if(e.getSource()==b4) {
-			cp.card.show(cp, "acomm");
-		} else if(e.getSource()==b5) {
 			cp.card.show(cp, "find");
-		} else if(e.getSource()==b6) {
+		} else if(e.getSource()==b4) {
 			cp.card.show(cp, "chat");
-		} else if(e.getSource()==b7) {
+		} else if(e.getSource()==b5) {
 			cp.card.show(cp, "news");
 		} 
 		else if(e.getSource()== login.b1) {
@@ -206,8 +210,8 @@ public void travelDisplay() {
 			//서버로 전송
 			try {
 				//서버 연결
-				//s= new Socket("211.238.142.118", 3456);
 				s= new Socket("211.238.142.118", 3456);
+			//	s= new Socket("", 3456);
 				//서버 컴퓨터 => IP
 				//211.238.142.()
 				//읽는 위치 / 쓰는 위치
@@ -312,6 +316,11 @@ public void travelDisplay() {
 					rm.setVisible(true);
 					
 				}
+				else if(e.getSource() == b6)  { //나가기 
+					try {
+						out.write((Function.EXIT+ "|" + myId + "\n").getBytes());
+					} catch (Exception ex) {}
+				}
 	}
 
 	// 서버에서 결과값을 받아서 출력 => 쓰레드 (자동화)
@@ -375,6 +384,25 @@ public void travelDisplay() {
 						
 						
 					}
+					break;
+					case Function.MYEXIT:	//본인만 나가기
+					{
+						dispose(); //윈도우 메모리 해제
+						System.exit(0);	//프로그램 종료
+					}
+					break;
+					case Function.EXIT: //남아있는 사람 나가기
+					{
+						String mid = st.nextToken();
+						for(int i=0; i<cp.cp.model.getRowCount(); i++) {
+							String uid = cp.cp.table.getValueAt(i, 0).toString();	//table명단에서 제거
+							if(mid.equals(uid)) {
+								cp.cp.model.removeRow(i);
+								break;
+							}
+						}
+					}
+					break;
 					}
 				}
 			} catch(Exception e) {}

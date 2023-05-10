@@ -241,6 +241,26 @@ public class Server implements Runnable {
 								}
 							}
 							break;
+							case Function.EXIT:
+							{
+								String mid = st.nextToken();
+								int i=0;
+								for(Client user: waitVC) {
+									if(user.id.equals(mid)) {
+										user.messageTo(Function.MYEXIT + "|"); 
+										waitVC.remove(i); //벡터 제거
+										in.close();
+										out.close();
+										//서버종료
+										break;
+										
+									}
+									i++;
+								}
+								//전체 메세지
+								messageAll(Function.EXIT+"|"+mid);
+							}
+							break;
 							}
 				} catch (Exception e) {
 					// TODO: handle exception

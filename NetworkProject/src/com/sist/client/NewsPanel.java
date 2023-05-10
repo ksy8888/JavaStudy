@@ -35,7 +35,7 @@ public class NewsPanel extends JPanel implements ActionListener {
 		//배치
 		tf.setBounds(10, 15, 300, 30);
 		b.setBounds(320, 15, 100, 30);
-		pan.setBounds(10, 55, 720, 650);
+		pan.setBounds(10, 55, 800, 650);
 		add(tf);
 		add(b);
 		add(pan);

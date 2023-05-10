@@ -9,13 +9,14 @@ public class ControlPanel extends JPanel {
 	NewsPanel np = new NewsPanel();
 	ChatPanel cp = new ChatPanel();
 	FindPanel fp = new FindPanel();
-	RecommandPanel rp = new RecommandPanel();
 	
 	HomePanel hp;
 	DetailPanel dp;
-		
-	CardLayout card = new CardLayout();
+	BoardListPanel bp;	
+	BoardDetailPanel bdp;
 	
+	CardLayout card = new CardLayout();
+	BoardInsertPanel ip;
 	
 	public ControlPanel() {
 		
@@ -23,13 +24,19 @@ public class ControlPanel extends JPanel {
 		
 		hp = new HomePanel(this);
 		dp = new DetailPanel(this);
+		bp = new BoardListPanel(this);
+		ip = new BoardInsertPanel(this);
+		bdp = new BoardDetailPanel(this);
+		
 		setLayout(card);
 		add("home", hp);
 		add("news", np);
 		add("chat", cp);
 		add("find", fp);
-		add("recomm", rp);
 		add("detail", dp);
+		add("board", bp);	
+		add("insert", ip);
+		add("bdp", bdp);
 		
 	}
 }
