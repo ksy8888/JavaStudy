@@ -19,7 +19,51 @@ import java.io.*;
 import java.net.*;
 
 /*
- * 
+ 	자바
+ 		클래스개념 / 예외처리 / 라이브러리 / 인터페이스
+ 		------변수/메소드/생성자 		    ------요구사항 분석(기능)
+ 		
+ 		java.lang
+ 			Object / String / StringBuffer / Math / Wrapper
+ 			
+ 		java.util
+ 			StringTokenizer / Date,Calendar
+ 			Collection => ArrayList, HashMap, HashSet
+ 			
+ 		java.net
+ 			URL , URLEncoder
+ 			
+ 		java.io : 웹 => 업로드,다운로드 (File)
+ 				  => Buffered~
+ 				  FileInputStream/FileOutputStream
+ 				  FileReader / FileWriter
+ 				  BufferedReader / File
+ 				  
+ 		java.text : SimpleDateFormat
+ 		----------------------------------------------------------------------
+ 	 2차 자바 (Web 관련)
+ 	 	java.sql , javax.sql, javax.nameing
+ 	 	javax.servlet.*
+ 	 	
+ 	 =>	1) 오라클 제어
+ 	 		SELECT / UPDATE / DELETE / INSERT => DML
+ 	 		--------------------------------- 데이터 조작언어
+ 	 		
+ 	 		CREATE / ALTER / DROP / TRUNCATE / RENAME => DDL
+ 	 		------------------------------------------ 데이터 저장/생성
+ 	 		
+ 	 		GRANT/REVOKE
+ 	 		------------ DCL (Admin)
+ 	 		
+ 	 		COMMIT / ROLLBACK
+ 	 		----------------- TCL(일괄처리)
+ 		 2) 기타 : VIEW / SEQUENCE / PS-SQL(FUNCTION, 프로시저/TRIGGER)
+ 		 3) 데이터베이스 모델링 (정규화 , 제약조건)
+ 	 
+ 	 => 브라우저에 데이터출력 : HTML / CSS/ JavaScript
+ 	 => 자바스크립트 라이브러리: JQuery / Ajax
+ 	  					  ------------- 교재(동영상)
+ 		 
  */
 public class NetworkMain extends JFrame implements ActionListener, Runnable, MouseListener {
 	

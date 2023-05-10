@@ -187,6 +187,7 @@ public class Server implements Runnable {
 							
 							
 							messageTo(Function.MYLOG+ "|" + name + "|" + id);
+							
 							//로그인하는 사람에게 모든 정보를 전송
 							for(Client user : waitVC) {
 								messageTo(Function.LOGIN + "|" 
