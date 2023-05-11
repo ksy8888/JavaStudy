@@ -101,7 +101,7 @@ public class Travel_NetworkMain extends JFrame implements ActionListener, Runnab
 			b5.setBackground(new Color(252, 128, 104));
 			b6.setBackground(new Color(252, 128, 104));
 			
-		
+		cp.setBackground(new Color(252, 128, 104));
 		
 		//윈도우 크기
 		setSize(1250,950);
@@ -210,8 +210,8 @@ public void travelDisplay() {
 			//서버로 전송
 			try {
 				//서버 연결
-				s= new Socket("211.238.142.118", 3456);
-			//	s= new Socket("", 3456);
+				//s= new Socket("211.238.142.118", 3456);
+				s= new Socket("", 3456);
 				//서버 컴퓨터 => IP
 				//211.238.142.()
 				//읽는 위치 / 쓰는 위치
