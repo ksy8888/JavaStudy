@@ -10,7 +10,7 @@ public class 배열_4_이진법 {
 		System.out.println("정수 입력: ");
 		int input = scan.nextInt();
 		
-		System.out.println(Integer.toBinaryString(input));	//라이브러리
+	//		System.out.println(Integer.toBinaryString(input));	//라이브러리
 		
 		//저장 공간(0,1)
 		int[] binary = new int[16];
