@@ -41,7 +41,7 @@ package com.sist.dao;
  */
 //멤버변수 = 컬럼명 => 동일
 import java.util.*;
-
+//
 public class EmpVO {
 	private int empno;
 	private String ename;

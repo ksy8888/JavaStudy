@@ -122,7 +122,7 @@ public class EmpDAO {
 		}
 		return list;
 	}
-	
+//	
 	// 2.상세보기
 	public EmpVO empDetailData(int empno) {
 		EmpVO vo = new EmpVO();
